@@ -13,36 +13,24 @@ const GameBoard = (() => {
         }
     };
 
-    const clearBoard = (tiles) => {
-        tiles.forEach(e => {
-            e.innerHTML = "";
-        });
-    };
-
-    const freezeBoard = (tiles, mark) => {
-        tiles.forEach(e => {
-            e.removeEventListener('mouseover', mark);
-        });
-    };
-
     return {
         makeBoard,
-        clearBoard,
-        freezeBoard,
     }
 })();
 
 GameBoard.makeBoard();
-
+const tiles = document.querySelectorAll('.tile');
+//console.log(tiles);
 // GAMEFLOW 
 
 const GameControl = (() => {
-    const tiles = document.querySelectorAll('.tile');
+    
     const WINNING_COMBS = [
         [0,1,2],[3,4,5],[6,7,8],
         [2,5,8],[1,7,4],[0,3,6],
         [0,4,8],[6,4,2]
     ]
+
     let lastTurn = "O";
     
     const getCleanBoard = () => {
@@ -55,7 +43,11 @@ const GameControl = (() => {
     
     let marked = getCleanBoard();
 
-    
+    function freezeBoard(mark){
+        tiles.forEach(e => {
+            e.removeEventListener('mousedown', mark);
+        });
+    };
     
     function checkWinner(){
         let won = false;
@@ -73,33 +65,11 @@ const GameControl = (() => {
                 }
             }
         });
-        
         return won;
     }
 
-    let index;
-    let won;
-
-    function mark(e) {
-        index = Array.from(e.parentNode.children).indexOf(e);
-            if(marked[index] !== "") {
-                if(lastTurn === "O") {
-                    marked[index] = 'X';
-                    e.innerHTML = "X";
-                    lastTurn = "X";
-                }
-                else {
-                    marked[index] = 'O';
-                    e.innerHTML = "O";
-                    lastTurn = "O";
-                }   
-                won = checkWinner();        
-                endGame(won);
-            }
-    }
-
-    function endGame(won) {
-        if(won) GameBoard.freezeBoard(tiles,  mark);
+    function endGame(won, mark) {
+        if(won) freezeBoard(mark);
         else {
             let i = 0;
             marked.forEach(e => {
@@ -107,20 +77,35 @@ const GameControl = (() => {
             });   
             if(i === 0) {
                 document.getElementById('msg').innerHTML= "It's a draw";
-                GameBoard.freezeBoard(tiles, mark);
+                freezeBoard(mark);
             }
         }
     }
-    function boardReady(){
-        tiles.forEach(e => {
-            e.addEventListener('mousedown', mark(e));
-        })
-    }
 
-    boardReady();
+    let index;
+    let won;
+    
+        tiles.forEach(tile => {
+            tile.addEventListener('mousedown', function mark(){
+                index = Array.from(tile.parentNode.children).indexOf(tile);
+
+            if(marked[index] === "") {
+                if(lastTurn === "O") {
+                    marked[index] = 'X';
+                    tile.innerHTML = "X";
+                    lastTurn = "X";
+                }
+                else {
+                    marked[index] = 'O';
+                    tile.innerHTML = "O";
+                    lastTurn = "O";
+                }   
+                won = checkWinner();        
+                endGame(won, mark);
+            }
+        });
+});
+
 
 })();
-
- 
-
 
