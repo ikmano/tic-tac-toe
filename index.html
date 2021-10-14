@@ -8,26 +8,26 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div class="container">
-        <div class="control-panel">
-            <div class="header">
-                <h1>Tic Tac Toe</h1>
-                <div class="player">
-                    X <input type="text" id="p1" placeholder="player1">
+    <div class="bcg-cover">
+        <div class="container">
+            <div class="control-panel">
+                <div class="header">
+                    <h1>Tic Tac Toe</h1>
+                    <div class="player">
+                        X <input type="text" id="p1" placeholder="player1">
+                    </div>
+                    <div class="player">
+                        O <input type="text" id="p2" placeholder="player2">
+                    </div>
+                    <button type="button" id="start-btn" onclick="">Start/Restart</button>
+                    <p id="msg">Who won?</p>
                 </div>
-                <div class="player">
-                    O <input type="text" id="p2" placeholder="player2">
-                </div>
-                <button type="button" id="start-btn" onclick="">Stert/Restart</button>
-                <p>Who won?</p>
             </div>
+            <div class="game-board" id="board">
 
-        </div>
-        <div class="game-board" id="board">
-
+            </div>
         </div>
     </div>
-    
 </body>
 <script src="app.js"></script>
 </html>

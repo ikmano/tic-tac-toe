@@ -1,49 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+:root{
+    --cell-size: 100px;
+}
 body{
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0, 128, 0, 0.45);
+    position: relative;
+    background-color: white;
+    background-image: url(img/xo_img.png);
+    background-repeat: repeat;
+    font-family: "Finger Paint";
+    color: white;
+}
+.bcg-cover{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .container{
-    height: 90%;
-    width: 90%;
-    background-color: white;
+    height: 60%;
+    width: 50%;
+    background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,28,1) 118% );
+    border-radius: 5px;
     display: flex;
+    box-shadow: 10px 10px 30px rgb(92, 10, 95);
 }
 .control-panel{
-    width:50%;
-    background-color: hotpink;
+    width:40%;
     display: flex;
     flex-direction: column;
     padding: 30px;
+    align-items: center;
 }
 .game-board{
-    padding: 100px;
-    width: 50%;
-    background-color: cornflowerblue;
-    display: flex;
-    flex-wrap: wrap;
+    width: 60%;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(3, auto);
+   
 }
-.board-tile{
-    flex-basis: 33.333333%;
-    background-color: green;
-    width: auto;
-    border: 2px solid black;
+.tile{
+    border: 1px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: larger;
+    font-size: 50px;
+    cursor: pointer;
+    width: var(--cell-size);
+    height: var(--cell-size);
+}
+.tile:nth-child(n + 1){
+    border-top: none;
+}
+.tile:nth-child(3n + 1){
+    border-left: none;
+}
+.tile:nth-child(3n + 3){
+    border-right: none;
+}
+.tile:nth-child(n + 7){
+    border-bottom: none;
 }
 .player{
     margin: 10px 0;
 }
 #start-btn{
     margin-bottom: 10px;
+    height: 2.6em;
+    width: 10em;
+    font-family: "Finger Paint";
+    border-radius: 5em;
+}
+input{
+    height: 2em;
+    width: 12em;
+    font-family: "Finger Paint";
+    border-radius: 5em;
+    padding-left: 20px;
+}
+input:focus{
+    outline: none;
 }
