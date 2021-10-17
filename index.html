@@ -10,22 +10,30 @@
 <body>
     <div class="bcg-cover">
         <div class="container">
-            <div class="control-panel">
-                <div class="header">
-                    <h1>Tic Tac Toe</h1>
+            <div class="inner">
+                <div class="face face-front">
+                    <h1>Welcome to Tic Tac Toe</h1>
+                    <h3>Enter names ...</h3>
+                    <!-- <h3>and choose who starts first.</h3> -->
                     <div class="player">
-                        X <input type="text" id="p1" placeholder="player1">
+                        X <input type="text" id="pX" placeholder="player X">
                     </div>
                     <div class="player">
-                        O <input type="text" id="p2" placeholder="player2">
+                        O <input type="text" id="pO" placeholder="player O">
                     </div>
-                    <button type="button" id="start-btn" onclick="GameControl.reset()">Restart</button>
-                    <p id="msg">Who won?</p>
+                    <button type="button" id="start-btn">Start</button>
                 </div>
-            </div>
-            <div class="game-board" id="board">
+                <div class="face face-back">
+                    <div class="control-panel">
+                        <h1>Tic Tac Toe</h1>
+                        <button type="button" id="restart-btn" onclick="GameControl.reset()">Restart</button>
+                        <p id="msg"></p>
+                    </div>
+                    <div class="game-board" id="board">
 
-            </div>
+                    </div>
+                </div>
+            </div>               
         </div>
     </div>
 </body>

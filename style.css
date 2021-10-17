@@ -30,17 +30,47 @@ body{
 .container{
     height: 60%;
     width: 50%;
-    background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,28,1) 118% );
-    border-radius: 5px;
-    display: flex;
+	perspective: 1500px;
+}
+.inner{
+	width: 100%;
+	height: 100%;
+	transition: transform 1s;
+	transform-style: preserve-3d;
+	cursor: pointer;
+	position: relative;
+}
+.inner.is-flipped{
+	transform: rotateY(180deg);
+}
+.face{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	border-radius: 5px;
     box-shadow: 10px 10px 30px rgb(92, 10, 95);
     overflow: hidden;
+}
+.face-front{
+	background-image: linear-gradient(279deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,28,1) 118% );
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.face-back{
+	transform: rotateY(180deg);
+	background-image: linear-gradient(99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,28,1) 118% );
+    display: flex;
+    flex-direction: row;
 }
 .control-panel{
     width:40%;
     display: flex;
     flex-direction: column;
     padding: 30px;
+    justify-content: center;
     align-items: center;
 }
 .game-board{
@@ -49,7 +79,6 @@ body{
     justify-content: center;
     align-content: center;
     grid-template-columns: repeat(3, auto);
-   
 }
 #freeze{
     width: 100%;
@@ -81,8 +110,8 @@ body{
 .player{
     margin: 10px 0;
 }
-#start-btn{
-    margin-bottom: 10px;
+button{
+    margin: 10px 0 20px;
     height: 2.6em;
     width: 10em;
     font-family: "Finger Paint";
@@ -98,3 +127,4 @@ input{
 input:focus{
     outline: none;
 }
+

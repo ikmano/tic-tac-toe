@@ -1,5 +1,4 @@
 // GAMEBOARD
-
 const GameBoard = (() => {
     const htmlBoard = document.getElementById('board');
     const boardSize = 9;
@@ -14,7 +13,6 @@ const GameBoard = (() => {
     };
 
     const resetBoard = () => {
-        console.log(htmlBoard);
         while (htmlBoard.firstChild) {
             htmlBoard.firstChild.remove()
         }
@@ -34,9 +32,7 @@ const GameBoard = (() => {
     }
 })();
 
-GameBoard.makeBoard();
 // GAMEFLOW 
-
 const GameControl = (() => {
     const WINNING_COMBS = [
         [0,1,2],[3,4,5],[6,7,8],
@@ -44,27 +40,27 @@ const GameControl = (() => {
         [0,4,8],[6,4,2]
     ]
     const msg = document.getElementById('msg');
+
    
     const getCleanBoard = (tiles) => {
         let boardMembers = [];
         tiles.forEach(tile => {
             boardMembers.push(tile.innerHTML);
         });
-        console.log(boardMembers);
         return boardMembers;
-    }
+    }    
     
-    function checkWinner(marked){
+    function checForkWinner(marked, pX, pO){
         let won = false;
         WINNING_COMBS.forEach(x => {
             if(marked[x[0]] === marked[x[1]]) {
                 if(marked[x[0]] === marked[x[2]]) {
                     if(marked[x[0]] === "X") {
-                        msg.innerHTML= "Congratulations X's won!";
+                        msg.innerHTML= `Congratulations ${pX} won!`;
                         won = true;
                     }                        
                     else if(marked[x[0]] === 'O') {
-                        msg.innerHTML= "Congratulations O's won!";
+                        msg.innerHTML= `Congratulations ${pO} won!`;
                         won = true;
                     }
                 }
@@ -74,47 +70,52 @@ const GameControl = (() => {
     }
 
     function endGame(won, marked) {
-        if(won) {
-            GameBoard.freezeBoard();
-        }
+        if(won) GameBoard.freezeBoard();
         else {
             let i = 0;
-            marked.forEach(e => {
-                if(e === "") i++;
+            marked.forEach(element => {
+                if(element === "") i++;
             });   
-            if(i === 0) {
-                msg.innerHTML= "It's a tie";
-                GameBoard.freezeBoard();
-            }
+            if(i === 0) msg.innerHTML= "It's a tie";
         }
     }
 
-    const start = () => {
+    const start = (playerO, playerX) => {
         const tiles = document.querySelectorAll('.tile');
         let marked = getCleanBoard(tiles);
-        console.log(marked);
         let lastTurn = "O";
         let index;
         let won;
 
+        function turnMsg(player){
+            msg.innerHTML = `${player}'s turn.`;
+        }
+        turnMsg(playerX)
+
+        function markTile(tile){
+            if(marked[index] === "") {
+                if(lastTurn === "O") {
+                    marked[index] = "X";
+                    tile.innerHTML = "X";
+                    lastTurn = "X";
+                    turnMsg(playerO);
+                }
+                else {
+                    marked[index] = "O";
+                    tile.innerHTML = "O";
+                    lastTurn = "O";
+                    turnMsg(playerX);
+                }
+            }   
+        }
+
         tiles.forEach(tile => {
             tile.addEventListener('mousedown', () => {
                 index = Array.from(tile.parentNode.children).indexOf(tile);
-                if(marked[index] === "") {
-                    if(lastTurn === "O") {
-                        marked[index] = "X";
-                        tile.innerHTML = "X";
-                        lastTurn = "X";
-                    }
-                    else {
-                        marked[index] = "O";
-                        tile.innerHTML = "O";
-                        lastTurn = "O";
-                    }   
-                    won = checkWinner(marked);        
+                    markTile(tile);
+                    won = checForkWinner(marked, playerX, playerO);        
                     endGame(won, marked);
-                }
-          });
+            });
         });
     }
 
@@ -131,4 +132,16 @@ const GameControl = (() => {
 
 })();
 
-GameControl.start();
+const btn = document.querySelector('#start-btn');
+const card = document.querySelector('.inner');
+
+btn.addEventListener('click', () => {
+    const playerX = document.getElementById('pX');
+    const playerO = document.getElementById('pO');
+	card.classList.toggle('is-flipped');
+    GameBoard.makeBoard();
+    GameControl.start(playerO.value, playerX.value);
+});
+
+// GameBoard.makeBoard();
+// GameControl.start();
