@@ -34,6 +34,7 @@ body{
     border-radius: 5px;
     display: flex;
     box-shadow: 10px 10px 30px rgb(92, 10, 95);
+    overflow: hidden;
 }
 .control-panel{
     width:40%;
@@ -49,6 +50,11 @@ body{
     align-content: center;
     grid-template-columns: repeat(3, auto);
    
+}
+#freeze{
+    width: 100%;
+    height: 100%;
+    position: fixed;
 }
 .tile{
     border: 1px solid white;
