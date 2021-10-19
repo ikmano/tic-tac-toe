@@ -53,7 +53,7 @@ const GameControl = (() => {
         [0,4,8],[6,4,2]
     ]
     const msg = document.getElementById('msg');
-    let players;
+    let players = {};
 
     const getCleanBoard = (tiles) => {
         let boardMembers = [];
@@ -133,11 +133,13 @@ const GameControl = (() => {
     }
 
     const startGame = () => {
-        players = playerNames();
+        let p = playerNames();
+        players = p;
+        console.log(players);
         const card = document.querySelector('.inner');
         card.classList.toggle('is-flipped');
         GameBoard.makeBoard();
-        start(players.o, players.x);
+        start(p.o, p.x);
         
     }
 
