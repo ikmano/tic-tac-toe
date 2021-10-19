@@ -34,14 +34,27 @@ const GameBoard = (() => {
 
 // GAMEFLOW 
 const GameControl = (() => {
+    function playerNames() {
+        const playerX = document.getElementById('pX');
+        const playerO = document.getElementById('pO');
+        let players = {
+            'x': 'X',
+            'o': 'O'
+        }
+        if(playerO.value && playerX.value){
+            players.x = playerX.value;
+            players.o = playerO.value;
+        }
+        return players;
+    }
     const WINNING_COMBS = [
         [0,1,2],[3,4,5],[6,7,8],
         [2,5,8],[1,7,4],[0,3,6],
         [0,4,8],[6,4,2]
     ]
     const msg = document.getElementById('msg');
+    let players;
 
-   
     const getCleanBoard = (tiles) => {
         let boardMembers = [];
         tiles.forEach(tile => {
@@ -56,11 +69,11 @@ const GameControl = (() => {
             if(marked[x[0]] === marked[x[1]]) {
                 if(marked[x[0]] === marked[x[2]]) {
                     if(marked[x[0]] === "X") {
-                        msg.innerHTML= `Congratulations ${pX} won!`;
+                        msg.innerHTML= `Congratulations ${pX}'s won!`;
                         won = true;
                     }                        
                     else if(marked[x[0]] === 'O') {
-                        msg.innerHTML= `Congratulations ${pO} won!`;
+                        msg.innerHTML= `Congratulations ${pO}'s won!`;
                         won = true;
                     }
                 }
@@ -88,7 +101,7 @@ const GameControl = (() => {
         let won;
 
         function turnMsg(player){
-            msg.innerHTML = `${player}'s turn.`;
+            msg.innerHTML = `${player}s turn.`;
         }
         turnMsg(playerX)
 
@@ -119,29 +132,25 @@ const GameControl = (() => {
         });
     }
 
+    const startGame = () => {
+        players = playerNames();
+        const card = document.querySelector('.inner');
+        card.classList.toggle('is-flipped');
+        GameBoard.makeBoard();
+        start(players.o, players.x);
+        
+    }
+
     const reset = () => {
         GameBoard.resetBoard();
         msg.innerHTML= "";
-        start();
+        start(players.o, players.x);
     }
 
     return {
-        start,
+        startGame,
         reset,
     }
 
 })();
 
-const btn = document.querySelector('#start-btn');
-const card = document.querySelector('.inner');
-
-btn.addEventListener('click', () => {
-    const playerX = document.getElementById('pX');
-    const playerO = document.getElementById('pO');
-	card.classList.toggle('is-flipped');
-    GameBoard.makeBoard();
-    GameControl.start(playerO.value, playerX.value);
-});
-
-// GameBoard.makeBoard();
-// GameControl.start();
