@@ -8,11 +8,11 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div class="bcg-cover">
+    <div class="bcg-cover"></div>
         <div class="container">
             <div class="inner">
                 <div class="face face-front">
-                    <span><h1>Welcome to Tic Tac Toe</h1></span>
+                    <h1>Tic Tac Toe</h1>
                     <h3>Enter names ...</h3>
                     <!-- <h3>and choose who starts first.</h3> -->
                     <div class="player">
@@ -25,17 +25,16 @@
                 </div>
                 <div class="face face-back">
                     <div class="control-panel">
-                        <h1>Tic Tac Toe</h1>
-                        <button type="button" id="restart-btn" onclick="GameControl.reset()">Restart</button>
                         <p id="msg"></p>
+                        <button type="button" id="restart-btn" onclick="GameControl.reset()">Restart</button>
                     </div>
                     <div class="game-board" id="board">
 
                     </div>
                 </div>
-            </div>               
+            </div>   
         </div>
-    </div>
+    
     <script src="app.js"></script>
 </body>
 </html>

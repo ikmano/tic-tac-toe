@@ -1,137 +1,190 @@
 @import url("https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap");
-
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-:root {
-  --cell-size: 100px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
   position: relative;
   background-color: white;
-  background-image: url(img/xo_img.png);
+  background-image: url(../img/xo_img.png);
   background-repeat: repeat;
   font-family: "Finger Paint";
   color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .bcg-cover {
-  position: absolute;
   height: 100%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
 }
+
 .container {
-  min-width: 600px;
+  min-width: 625px;
   height: 60%;
   width: 45%;
-  perspective: 1500px;
+  -webkit-perspective: 1500px;
+          perspective: 1500px;
 }
-@media (max-width: 625px) {
-  .container {
-    width: 100%;
-    height: 100%;
-  }
-}
+
 .inner {
-  width: 100%;
   height: 100%;
+  width: 100%;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
   transition: transform 1s;
-  transform-style: preserve-3d;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
   position: relative;
 }
 .inner.is-flipped {
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
+
 .face {
   position: absolute;
-  width: 100%;
   height: 100%;
-  backface-visibility: hidden;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   border-radius: 5px;
-  box-shadow: 10px 10px 30px rgb(92, 10, 95);
+  -webkit-box-shadow: 10px 10px 30px #5c0a5f;
+          box-shadow: 10px 10px 30px #5c0a5f;
 }
+
 .face-front {
-  background-image: linear-gradient(
-    279deg,
-    rgba(115, 18, 81, 1) 10.6%,
-    rgba(28, 28, 28, 1) 118%
-  );
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-image: linear-gradient(279deg, #731251 10.6%, #1c1c1c 118%);
 }
+
 .face-back {
-  transform: rotateY(180deg);
-  background-image: linear-gradient(
-    99deg,
-    rgba(115, 18, 81, 1) 10.6%,
-    rgba(28, 28, 28, 1) 118%
-  );
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  background-image: linear-gradient(99deg, #731251 10.6%, #1c1c1c 118%);
 }
+
 .control-panel {
   width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  padding: 30px;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .game-board {
+  position: relative;
   width: 60%;
   display: grid;
-  justify-content: center;
-  align-content: center;
   grid-template-columns: repeat(3, auto);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
+
 #freeze {
-  width: 100%;
-  height: 100%;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
+
 .tile {
   border: 1px solid white;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 50px;
   cursor: pointer;
-  width: var(--cell-size);
-  height: var(--cell-size);
+  width: 100px;
+  height: 100px;
 }
-.tile:nth-child(n + 1) {
+.tile:nth-child(n+1) {
   border-top: none;
 }
-.tile:nth-child(3n + 1) {
+.tile:nth-child(3n+1) {
   border-left: none;
 }
-.tile:nth-child(3n + 3) {
+.tile:nth-child(3n+3) {
   border-right: none;
 }
-.tile:nth-child(n + 7) {
+.tile:nth-child(n+7) {
   border-bottom: none;
 }
+
 .player {
   margin: 10px 0;
 }
+
 button {
-  margin: 10px 0 20px;
+  margin-top: 10px;
   height: 2.6em;
   width: 10em;
   font-family: "Finger Paint";
   border-radius: 5em;
   cursor: pointer;
 }
+
 input {
   height: 2em;
   width: 12em;
@@ -142,6 +195,48 @@ input {
 input:focus {
   outline: none;
 }
-h1 {
-  text-align: center;
+
+@media (max-width: 625px) {
+  .container {
+    min-width: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .face {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border-radius: 0;
+  }
+
+  .face-back {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-top: 30px;
+  }
+
+  .control-panel {
+    width: 100%;
+    height: 30%;
+  }
+
+  .game-board {
+    width: 100%;
+    height: 70%;
+  }
 }
+@media (orientation: landscape) and (max-width: 824px) {
+  .container {
+    min-width: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .face {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border-radius: 0;
+  }
+}/*# sourceMappingURL=style.css.map */
