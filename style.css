@@ -11,7 +11,7 @@ body {
   height: 100vh;
   position: relative;
   background-color: white;
-  background-image: url(../img/xo_img.png);
+  background-image: url(./img/xo_img.png);
   background-repeat: repeat;
   font-family: "Finger Paint";
   color: white;
